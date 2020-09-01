@@ -1,3 +1,4 @@
+import io from 'socket.io-client';
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import { Layout } from 'antd';
@@ -10,8 +11,19 @@ const App = observer(() => {
   const { usersStore } = useRootStore();
 
   useEffect(() => {
-    usersStore.getMe();
-  });
+    usersStore.fetchUser().then((res) => {
+      const socket = io('http://localhost:3000');
+
+      socket.on('connect', () => {
+        console.log('connected');
+      });
+
+      socket.emit('BATTLE_START', { enemyArmyId: 5 });
+      socket.on('BATTLE_END', (data) => {
+        console.log('RESULT => ', data);
+      });
+    });
+  }, [usersStore]);
 
   return (
     <div style={{ height: '100%' }}>

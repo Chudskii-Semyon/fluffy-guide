@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx';
 import AuthService from '../services/authService';
-import { AUTH_TOKEN } from '../styles/constants';
+import { AUTH_TOKEN } from '../constants';
 
 class AuthStore {
   @observable authToken = ''
@@ -22,7 +22,7 @@ class AuthStore {
 
       this.setAuthToken(data.token);
       this.rootStore.uiState.setAuthenticated(true);
-      this.rootStore.userStore.updateUser(data.user);
+      this.rootStore.usersStore.setUser(data.user);
     } catch (error) {
       console.error('user authentication failed. Error ', error.message);
       throw error;
@@ -35,7 +35,7 @@ class AuthStore {
       const data = await this.authService.signUp(authData);
 
       this.setAuthToken(data.token);
-      this.rootStore.userStore.updateUser(data.user);
+      this.rootStore.usersStore.updateUser(data.user);
     } catch (error) {
       console.error('user registration failed. Error ', error.message);
       throw error;

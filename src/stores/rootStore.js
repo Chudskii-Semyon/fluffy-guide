@@ -1,35 +1,6 @@
 import AuthStore from './authStore';
 import UIState from './UIState';
 import UsersStore from './usersStore';
-//
-// const getCircularReplacer = () => {
-//   const seen = new WeakSet();
-//   return (key, value) => {
-//     if (typeof value === 'object' && value !== null) {
-//       if (seen.has(value)) {
-//         return;
-//       }
-//       seen.add(value);
-//     }
-//     return value;
-//   };
-// };
-//
-// const autoSave = (store, save) => {
-//   console.log('store => ', store);
-//   let firstRun = true;
-//
-//   autorun(() => {
-//     const json = JSON.stringify(store, getCircularReplacer());
-//
-//     console.log(`JSON => ${json}`);
-//     // const json = JSON.stringify(toJS(store));
-//     if (!firstRun) {
-//       save(json);
-//     }
-//     firstRun = false;
-//   });
-// };
 
 class RootStore {
   constructor() {
@@ -37,6 +8,8 @@ class RootStore {
     this.uiState = new UIState(this);
     this.usersStore = new UsersStore(this);
 
+    // this.load();
+    // this.autoSave();
     // this.load();
     // autoSave(this, this.saveToLocalStorage.bind(this));
   }

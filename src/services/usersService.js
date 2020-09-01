@@ -6,7 +6,7 @@ class UsersService {
   }
 
   async getMe(authData) {
-    const { data } = await this.api.post('/users/me', authData);
+    const { data } = await this.api.get('/users/me', authData);
     return data;
   }
 

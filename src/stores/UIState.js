@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx';
-import { AUTH_TOKEN } from '../styles/constants';
+import { AUTH_TOKEN } from '../constants';
 
 class UIState {
     @observable authenticated = false
